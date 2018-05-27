@@ -67,22 +67,19 @@ export class Cards extends Component {
             open={isOpen}
             basic
             style={inlineStyle.modal}>
-          <Modal.Content
-            style={{
-              marginLeft: '50%',
-            }}>
+          <Modal.Header>
+            <Button inverted color='red' onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal.Header>
+          <Modal.Content>
             {Object.entries(this.state.iframe).length !== 0 ? 
-
-            <iframe className='centered' width={this.state.iframe.dimensions.width ? this.state.iframe.dimensions.width : ''} height={this.state.iframe.dimensions.height ? this.state.iframe.dimensions.height : ''} src={`${this.state.iframe.url ? this.state.iframe.url : ''}`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe> 
-
+            <div>
+              <iframe className='iframe-banner' width={this.state.iframe.dimensions.width ? this.state.iframe.dimensions.width : ''} height={this.state.iframe.dimensions.height ? this.state.iframe.dimensions.height : ''} src={`${this.state.iframe.url ? this.state.iframe.url : ''}`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+            </div>
             : 
             'nada'}
           </Modal.Content>
-          <Modal.Actions>
-            <Button color='green' onClick={this.handleClose} inverted>
-              <Icon name='checkmark' /> Close
-            </Button>
-          </Modal.Actions>
           </Modal>
         </Card.Group>
       </div>
