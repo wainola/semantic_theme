@@ -1,0 +1,6 @@
+export const FETCH_DATA = 'fetch_data'
+export const ERR_DATA = 'err_data'
+export const FILTER_DESKTOP = 'filter_desktop'
+export const FILTER_MOBILE = 'filter_mobile'
+export const FILTER_VIDEOS = 'filter_videos'
+export const ALL_BANNERS = 'all_banners'
