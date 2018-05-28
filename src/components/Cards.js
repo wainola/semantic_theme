@@ -9,7 +9,9 @@ const inlineStyle = {
     marginTop: '0px !important',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: 'auto'
+    marginBottom: 'auto',
+    heigth: '100vh',
+    width: '100wh'
   }
 };
 
@@ -18,15 +20,13 @@ export class Cards extends Component {
     super(props)
     this.state = {
       isOpen: false,
-      iframe: {}
+      iframe: {},
     }
   }
   componentWillMount(){
     this.props.getBanners()
   }
   renderIframe = (data) => {
-    console.log('render iframe')
-    console.log('data iframe', data)
     this.setState({
       ...this.state,
       isOpen: !this.state.isOpen,
@@ -54,10 +54,13 @@ export class Cards extends Component {
   }
   render() {
     const { isOpen } = this.state
-    console.log(this.state.iframe)
+    let banners = []
+    if(this.props.bannerReducer.banners){
+      banners = this.props.bannerReducer.banners
+    }
     return ( 
       <div>
-        <Card.Group stackable itemsPerRow={4}>
+        <Card.Group stackable itemsPerRow={banners.length !== 0 && banners.length > 2 ? 4 : 1}>
           {this.props.bannerReducer.banners ?
           this.props.bannerReducer.banners.map(this.renderBanners)
           :
@@ -67,19 +70,26 @@ export class Cards extends Component {
             open={isOpen}
             basic
             style={inlineStyle.modal}>
-          <Modal.Header>
-            <Button inverted color='red' onClick={this.handleClose}>
-              Close
-            </Button>
-          </Modal.Header>
           <Modal.Content>
             {Object.entries(this.state.iframe).length !== 0 ? 
             <div>
-              <iframe className='iframe-banner' width={this.state.iframe.dimensions.width ? this.state.iframe.dimensions.width : ''} height={this.state.iframe.dimensions.height ? this.state.iframe.dimensions.height : ''} src={`${this.state.iframe.url ? this.state.iframe.url : ''}`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+              <iframe
+               style={{
+                 position: 'absolute',
+                 marginTop: '50%',
+                 top: parseInt(this.state.iframe.dimensions.width) <= 300 && parseInt(this.state.iframe.dimensions.height) === 600 ? 'calc(50% - 450px)' : 'calc(50% - 250px)',
+                 left: 'calc(50% - 150px)' 
+               }}
+               align='middle' sandbox width={this.state.iframe.dimensions.width ? this.state.iframe.dimensions.width : ''} height={this.state.iframe.dimensions.height ? this.state.iframe.dimensions.height : ''} src={`${this.state.iframe.url ? this.state.iframe.url : ''}`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
             </div>
             : 
             'nada'}
           </Modal.Content>
+            <Modal.Actions>
+             <Button style={{ zIndex: '99999999', position: 'absolute'}} inverted color='red' onClick={this.handleClose}>
+               Close
+             </Button>
+            </Modal.Actions>
           </Modal>
         </Card.Group>
       </div>

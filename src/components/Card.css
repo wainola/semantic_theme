@@ -1,15 +1,14 @@
 .iframe-banner{
   position: absolute;
   margin-top: 50%;
-  top: 50%;
-  left: 50%;
-  bottom: 50%;
-  -ms-transform: translate(-50%, -50%);
+  top: calc(40% - 300px);
+  left: calc(50% - 150px);
+  /* -ms-transform: translate(-50%, -50%); */
   /* IE 9 */
 
-  -webkit-transform: translate(-50%, -50%);
+  /* -webkit-transform: translate(-50%, -70%); */
   /* Safari iOS */
 
-  transform: translate(-50%, -50%, -50%);
+  /* transform: translate(-50%, -50%, -50%, -50%); */
   /* Rest of browsers */
 }
